@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.header {
+    border-bottom: 1px solid rgba(204, 204, 204, .315);
+    padding: 20px 0;
+}
+.logo {
+    font-size: 3rem;
+    font-family: "Lobster", sans-serif;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header ul {
+    display: flex;
+    gap: 32px;
+}
+.header ul li a {
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 100;
+}
