@@ -1,35 +1,36 @@
 import Link from "next/link"
 import Style from "../styles/Header.module.css"
-import { useState } from "react"
-import {useQuery, gql} from "@apollo/client"
+import { getAllCategories } from "@/services";
+// import { useState } from "react"
+// import {ApolloClient, gql, InMemoryCache} from "@apollo/client"
+// import client from "@/lib/ApolloClient"
 
-export default function Header() {
-    const [categoryLinks, setCategoryLinks] = useState([]);
-   const GET_CATEGORIES = gql`
-    query Categories {
-        categories {
-        color {
-            css
-        }
-        name
-        }
-    }
-   `;
-   const {data} = useQuery(GET_CATEGORIES);
-   setCategoryLinks(data.categories);
-   console.log(data);
+
+//  const client = new ApolloClient({
+//     uri: 'https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clgltdgt245sp01uj1grc9rzt/master',
+//       cache: new InMemoryCache(),
+//     });
+
+export default function Header({categories}) {
   return (
     <header className={Style.header}>
-        <div className={`container ` + Style.container}>
+        <div className="container flex justify-between items-center">
             <Link href="/" className={Style.logo}>ShareIt.</Link>
-            <ul>
-                {categoryLinks.map((link) => {
-                    <li key={Link.name}>
-                        <Link href={`/${link.name}`}>{link.name}</Link>
-                    </li>
-                })}
-            </ul>
+        <ul>
+        {
+      categories.map((category) => {
+        return (
+            <li key={category.id} className="text-xl">
+                <Link href={`/categories/${category.name.toLowerCase()}`}>
+                <span>{category.name}</span>
+                </Link>
+            </li>
+        )   
+      })
+    }
+    </ul>
         </div>
+        
     </header>
   )
 }
